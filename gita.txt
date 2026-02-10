@@ -1,0 +1,481 @@
+# ✅ 1) DATA SOURCES (Verse Content)
+
+### 🟢 Bhagavad-Gita Datasets (Offline)
+
+These are sources you can pull and convert to your **chapter JSON** format:
+
+📌 **Bhagavad Gita Dataset on Kaggle**
+Sanskrit + English + Hindi translations in CSV & JSON styles. ([Kaggle][1])
+🔗 [https://www.kaggle.com/datasets/madhurpant/bhagavad-gita-verses-dataset](https://www.kaggle.com/datasets/madhurpant/bhagavad-gita-verses-dataset)
+
+📌 **Parallel corpus (Hugging Face)**
+Sanskrit with aligned English + Hindi updates. Good for transliteration work. ([Hugging Face][2])
+🔗 [https://huggingface.co/datasets/JDhruv14/Bhagavad-Gita_Dataset](https://huggingface.co/datasets/JDhruv14/Bhagavad-Gita_Dataset)
+
+📌 **Bhagwat-Gita-Infinity dataset** (JSON styled)
+Has structured chapter/verse JSON — easy to adapt and convert. ([Hugging Face][3])
+🔗 [https://huggingface.co/datasets/Modotte/Bhagwat-Gita-Infinity](https://huggingface.co/datasets/Modotte/Bhagwat-Gita-Infinity)
+
+⚠️ **Important:**
+Many datasets include **public domain text** (Sanskrit, older English translations), but some modern translations are copyrighted. Always verify usage terms before publishing in your app.
+
+---
+
+## 🟡 Online APIs (Optional / For Reference Only)
+
+You *don’t* need these for offline v1; but good for testing, initial prototyping, or fallback.
+
+📌 **Bhagavad-Gita-API (Open Source)**
+Programmatically returns verses, chapters, etc. Free & public. ([GitHub][4])
+🔗 [https://vidicscriptures.github.io/](https://vidicscriptures.github.io/)
+
+Example calls:
+
+* `GET /chapters`
+* `GET /chapter/:ch`
+* `GET /slok/:ch/:sl`
+
+⚠️ **However:**
+Relying on online APIs in a *completely offline v1* app defeats your offline goal — so only use this if you *add online mode later*.
+
+---
+
+## 🟠 Other Useful Sites (Reference / Quality Checking)
+
+📌 Bhagavad Gita EU — text + commentaries online. Good for cross-checking. ([bhagavadgita.eu][5])
+🔗 [https://www.bhagavadgita.eu](https://www.bhagavadgita.eu)
+
+📌 Project Gutenberg Gita — historically public domain translation. ([Project Gutenberg][6])
+🔗 [https://www.gutenberg.org/files/2388/2388-h/2388-h.htm](https://www.gutenberg.org/files/2388/2388-h/2388-h.htm)
+
+---
+
+# ✅ 2) DOCUMENTATION YOU WILL USE
+
+These will be your *go-to reference docs* throughout development.
+
+---
+
+## 📌 React Native Basics
+
+📍 React Native official guide — environment setup, components, etc. ([React Native][7])
+🔗 [https://reactnative.dev/docs/getting-started](https://reactnative.dev/docs/getting-started)
+
+---
+
+## 📌 Expo (managed workflow)
+
+📍 Start here for Expo CLI workflows (build, asset bundling).
+🔗 [https://docs.expo.dev/](https://docs.expo.dev/)
+
+📍 Navigation in Expo (React Navigation integration). ([Expo Documentation][8])
+🔗 [https://docs.expo.dev/develop/app-navigation/](https://docs.expo.dev/develop/app-navigation/)
+
+📍 AsyncStorage (local persistence). ([Expo Documentation][9])
+🔗 [https://docs.expo.dev/versions/latest/sdk/async-storage/](https://docs.expo.dev/versions/latest/sdk/async-storage/)
+
+---
+
+## 📌 Navigation
+
+📍 React Navigation official docs for stacks/tabs. ([reactnavigation.org][10])
+🔗 [https://reactnavigation.org/docs/getting-started/](https://reactnavigation.org/docs/getting-started/)
+
+---
+
+## 📌 Styling
+
+If adopting a utility library (NativeWind), here’s the docs:
+
+📍 NativeWind (Tailwind-like for React Native)
+🔗 [https://www.nativewind.dev/](https://www.nativewind.dev/)
+
+**Or** if you don’t use utility CSS, React Native StyleSheet docs are here:
+🔗 [https://reactnative.dev/docs/style](https://reactnative.dev/docs/style)
+
+---
+
+## 📌 Optional Libraries (for later phases)
+
+If you expand after v1:
+
+* `react-native-svg` = for heatmap/grid features
+* `expo-view-shot` = for shareable verse cards
+* `expo-sharing` = to share images
+
+These have separate docs on the Expo site.
+
+---
+
+# ✅ 3) API / DATA DESIGN YOU NEED FOR V1
+
+Even if you don’t call *external* APIs, you’ll define your own JSON schema.
+
+Here’s what you’ll support offline:
+
+```jsonc
+{
+  "chapter": 1,
+  "name": {
+    "english": "...",
+    "hindi": "...",
+    "tamil": "...",
+    "kannada": "..."
+  },
+  "verses": [
+    {
+      "verse": 1,
+      "sanskrit": "...",
+      "transliteration": "...",
+      "translations": {
+        "english": "...",
+        "hindi": "...",
+        "tamil": "...",
+        "kannada": "..."
+      },
+      "commentary": {
+        "english": "...",
+        "hindi": "...",
+        "tamil": "...",
+        "kannada": "..."
+      }
+    }
+  ]
+}
+```
+
+The above schema ensures:
+✔ Offline usage
+✔ Multilingual support
+✔ Transliteration included
+✔ Room for later expansions (commentary, notes, etc.)
+
+---
+
+# 🔥 4) CONSTRAINTS (Tech + Languages)
+
+### 📌 Programming / Framework
+
+* **React Native (Expo managed workflow)**
+* **JavaScript / TypeScript**
+* Local offline data (JSON assets)
+* No backend API in v1
+
+---
+
+### 📌 Language Support
+
+Your app must support:
+
+* **Sanskrit (original script)**
+* **Transliteration (Latin script)**
+* **English**
+* **Hindi**
+* **Tamil**
+* **Kannada**
+
+This influences:
+✔ Fonts (Noto Serif for each script)
+✔ Rendering (font support for Devanagari, Tamil, Kannada)
+✔ Layout (long text wrapping, readability)
+
+---
+
+### 📌 Offline Requirements
+
+Everything must run with **no network** after initial install:
+
+✔ JSON data bundled
+✔ Fonts embedded
+✔ Navigation works offline
+
+---
+
+### 📌 Play Store Policies
+
+* Respect copyright licenses
+* Use public domain or properly attributed content
+* Provide credits / sources in app settings
+
+---
+
+# 💡 FINAL LIST OF URLS YOU SHOULD SAVE/USE
+
+### Bhagavad Gita Content
+
+* 📊 Kaggle Gita dataset: [https://www.kaggle.com/datasets/madhurpant/bhagavad-gita-verses-dataset](https://www.kaggle.com/datasets/madhurpant/bhagavad-gita-verses-dataset) ([Kaggle][1])
+* 📊 Hugging Face parallel corpus: [https://huggingface.co/datasets/JDhruv14/Bhagavad-Gita_Dataset](https://huggingface.co/datasets/JDhruv14/Bhagavad-Gita_Dataset) ([Hugging Face][2])
+* 🔹 Infinity JSON dataset: [https://huggingface.co/datasets/Modotte/Bhagwat-Gita-Infinity](https://huggingface.co/datasets/Modotte/Bhagwat-Gita-Infinity) ([Hugging Face][3])
+* 🌐 Bhagavad-Gita API code: [https://vedicscriptures.github.io/](https://vedicscriptures.github.io/) ([GitHub][4])
+* 📚 Project Gutenberg public domain Gita: [https://www.gutenberg.org/files/2388/2388-h/2388-h.htm](https://www.gutenberg.org/files/2388/2388-h/2388-h.htm) ([Project Gutenberg][6])
+
+### Development Documentation
+
+* 📘 React Native setup & docs: [https://reactnative.dev/docs/getting-started](https://reactnative.dev/docs/getting-started) ([React Native][7])
+* 📱 Expo docs: [https://docs.expo.dev/](https://docs.expo.dev/)
+* 📍 React Navigation: [https://reactnavigation.org/docs/getting-started/](https://reactnavigation.org/docs/getting-started/) ([reactnavigation.org][10])
+* 💾 AsyncStorage (Expo): [https://docs.expo.dev/versions/latest/sdk/async-storage/](https://docs.expo.dev/versions/latest/sdk/async-storage/) ([Expo Documentation][9])
+* 🧰 Expo Router / Navigation: [https://docs.expo.dev/develop/app-navigation/](https://docs.expo.dev/develop/app-navigation/) ([Expo Documentation][8])
+* 🪶 NativeWind (Tailwind for React Native): [https://www.nativewind.dev/](https://www.nativewind.dev/)
+
+---
+
+## Want Me to Do This Next?
+
+Just reply with one of the following and I’ll continue:
+
+**👉 “Generate a complete 18-chapter JSON (with all languages)”**
+**👉 “Show me how to integrate this content into React Native screens”**
+**👉 “Help build the content pipeline (scripts, normalization, tools)”**
+
+I’ll tailor the next step to exactly what you want next. 🚀📖📱
+
+[1]: https://www.kaggle.com/datasets/madhurpant/bhagavad-gita-verses-dataset?utm_source=chatgpt.com "Bhagavad Gita Verses Dataset"
+[2]: https://huggingface.co/datasets/JDhruv14/Bhagavad-Gita_Dataset?utm_source=chatgpt.com "JDhruv14/Bhagavad-Gita_Dataset · Datasets at ..."
+[3]: https://huggingface.co/datasets/Modotte/Bhagwat-Gita-Infinity?utm_source=chatgpt.com "Modotte/Bhagwat-Gita-Infinity · Datasets at Hugging Face"
+[4]: https://github.com/vedicscriptures/bhagavad-gita-api?utm_source=chatgpt.com "vedicscriptures/bhagavad-gita-api: An opensource rest ..."
+[5]: https://www.bhagavadgita.eu/en/?utm_source=chatgpt.com "Bhagavadgita - Bhagawadgita"
+[6]: https://www.gutenberg.org/files/2388/2388-h/2388-h.htm?utm_source=chatgpt.com "The Project Gutenberg E-text of The Bhagavad-Gita"
+[7]: https://reactnative.dev/docs/getting-started?utm_source=chatgpt.com "Introduction"
+[8]: https://docs.expo.dev/develop/app-navigation/?utm_source=chatgpt.com "Navigation in Expo and React Native apps"
+[9]: https://docs.expo.dev/versions/latest/sdk/async-storage/?utm_source=chatgpt.com "@react-native-async-storage/async-storage"
+[10]: https://reactnavigation.org/docs/getting-started/?utm_source=chatgpt.com "Getting started"
+
+
+
+# 📱 Application Specification — *Bhagavad Gita Reading App (v1)*
+
+## 1. High-Level Statement
+
+The application is an **offline-first, multilingual mobile reading app** that presents the **Bhagavad Gita** in a clean, calm, and distraction-free format, enabling users to read original Sanskrit verses along with transliteration, translations, and optional commentary on Android devices.
+
+---
+
+## 2. Intent & Purpose
+
+### Primary Intent
+
+To provide a **reliable, respectful, and accessible digital experience** for reading the Bhagavad Gita in its authentic form, without distractions, advertisements, or dependency on internet connectivity.
+
+### Purpose
+
+* Preserve the sanctity of the original text while making it accessible to modern users
+* Support readers across **multiple Indian and global languages**
+* Enable focused reading through thoughtful typography, layout, and offline availability
+* Serve as a foundational platform for future spiritual engagement features
+
+---
+
+## 3. Target Users & Their Needs
+
+### 3.1 Target User Groups
+
+#### 1. Spiritual Seekers
+
+* Want authentic Sanskrit verses
+* Prefer calm, uncluttered UI
+* Value offline access and readability
+
+#### 2. Students & Learners
+
+* Need transliteration to aid pronunciation
+* Require clear translations
+* Prefer chapter/verse structure
+
+#### 3. Multilingual Indian Users
+
+* Prefer reading in **Hindi, Tamil, or Kannada**
+* Want culturally respectful presentation
+
+#### 4. Casual Readers
+
+* Want simple navigation
+* Minimal setup
+* Easy font and theme adjustments
+
+---
+
+### 3.2 User Needs Mapping
+
+| User Need            | App Response                   |
+| -------------------- | ------------------------------ |
+| Read authentic Gita  | Public-domain Sanskrit text    |
+| Understand verses    | Transliteration + translations |
+| Language flexibility | 5-language support             |
+| Focused reading      | Minimalist UI                  |
+| Offline usage        | Bundled JSON + fonts           |
+| Accessibility        | Font size control + dark mode  |
+
+---
+
+## 4. Core Features & Functionality (v1)
+
+### 4.1 Reading & Content
+
+* Chapter-wise organization (18 chapters)
+* Verse-by-verse presentation
+* Original Sanskrit shlokas (always visible)
+* Transliteration (toggleable)
+* Translations in:
+
+  * English
+  * Hindi
+  * Tamil
+  * Kannada
+* Optional public-domain commentary (collapsible)
+
+---
+
+### 4.2 Personalization & Accessibility
+
+* Global language selection
+* Adjustable font size
+* Light / Dark mode
+* Script-appropriate fonts per language
+
+---
+
+### 4.3 Technical Characteristics
+
+* Fully offline after installation
+* No backend dependency
+* No login or user accounts
+* No ads
+* No analytics tracking (v1)
+
+---
+
+### 4.4 Navigation & Screens
+
+* Home Screen
+* Chapters Screen
+* Shloka Reading Screen
+* Settings / Profile Screen
+
+---
+
+## 5. Developer-Ready Technical Specification
+
+### 5.1 Platform & Framework Constraints
+
+| Category   | Decision                    |
+| ---------- | --------------------------- |
+| Platform   | Android only (v1)           |
+| Framework  | React Native (Expo managed) |
+| Language   | TypeScript                  |
+| Navigation | React Navigation            |
+| State      | React Context               |
+| Storage    | AsyncStorage                |
+| Data       | Static JSON assets          |
+| Backend    | None                        |
+
+---
+
+### 5.2 Offline Data Model (Canonical)
+
+```json
+{
+  "chapter": 1,
+  "verse_count": 47,
+  "name": {
+    "english": "Arjuna Vishada Yoga",
+    "hindi": "अर्जुन विषाद योग",
+    "tamil": "அர்ஜுன விஷாத யோகம்",
+    "kannada": "ಅರ್ಜುನ ವಿಷಾದ ಯೋಗ"
+  },
+  "verses": [
+    {
+      "verse": 1,
+      "sanskrit": "धर्मक्षेत्रे कुरुक्षेत्रे...",
+      "transliteration": "dharmakshetre kurukshetre...",
+      "translations": {
+        "english": "...",
+        "hindi": "...",
+        "tamil": "...",
+        "kannada": "..."
+      },
+      "commentary": {
+        "english": "...",
+        "hindi": "..."
+      }
+    }
+  ]
+}
+```
+
+**Rules**
+
+* Sanskrit is mandatory
+* Transliteration optional
+* Commentary optional
+* No network calls
+
+---
+
+### 5.3 UI / UX Constraints
+
+* Minimalist, non-material design
+* No excessive animations
+* High contrast, readable typography
+* Generous spacing for long verses
+* Respectful spiritual tone
+
+---
+
+### 5.4 Fonts & Script Support
+
+| Script                       | Font                  |
+| ---------------------------- | --------------------- |
+| Devanagari (Sanskrit, Hindi) | Noto Serif Devanagari |
+| Tamil                        | Noto Serif Tamil      |
+| Kannada                      | Noto Serif Kannada    |
+| English                      | Merriweather          |
+
+Fonts bundled locally.
+
+---
+
+### 5.5 Non-Functional Requirements
+
+* App must function with **zero internet**
+* Cold start < 2 seconds on mid-range Android devices
+* Smooth scrolling for long chapters
+* No crashes due to missing translations
+* Play Store policy compliant
+
+---
+
+## 6. Explicit Out-of-Scope (v1)
+
+The following are **intentionally excluded** to ensure timely delivery:
+
+* Daily reading plans
+* Streaks or heatmaps
+* Shareable verse images
+* Audio chanting
+* User accounts
+* Cloud sync
+* Notifications
+
+These are planned for post-launch iterations.
+
+---
+
+## 7. Success Criteria (v1)
+
+* App approved on Google Play Store
+* Reads correctly in all 5 languages
+* No internet required after install
+* Positive early feedback on readability and calm UI
+* Stable performance across devices
+
+---
+
+## 8. Future-Ready Notes
+
+The current architecture supports:
+
+* Adding daily readings without schema change
+* Adding bookmarks & streaks
+* Adding verse card generation
+* Adding commentary sources via attribution

@@ -1,0 +1,908 @@
+{
+  "timestamp": "2026-02-08T02:43:17.495Z",
+  "chapters": {
+    "chapter-01": {
+      "chapter": 1,
+      "verseCount": 44,
+      "actualVersesInArray": 44,
+      "match": true,
+      "verseNumberingIssues": [
+        {
+          "arrayPosition": 4,
+          "expectedVerseNumber": 5,
+          "actualVerseNumber": 6
+        },
+        {
+          "arrayPosition": 5,
+          "expectedVerseNumber": 6,
+          "actualVerseNumber": 7
+        },
+        {
+          "arrayPosition": 6,
+          "expectedVerseNumber": 7,
+          "actualVerseNumber": 8
+        },
+        {
+          "arrayPosition": 7,
+          "expectedVerseNumber": 8,
+          "actualVerseNumber": 9
+        },
+        {
+          "arrayPosition": 8,
+          "expectedVerseNumber": 9,
+          "actualVerseNumber": 10
+        },
+        {
+          "arrayPosition": 9,
+          "expectedVerseNumber": 10,
+          "actualVerseNumber": 11
+        },
+        {
+          "arrayPosition": 10,
+          "expectedVerseNumber": 11,
+          "actualVerseNumber": 12
+        },
+        {
+          "arrayPosition": 11,
+          "expectedVerseNumber": 12,
+          "actualVerseNumber": 13
+        },
+        {
+          "arrayPosition": 12,
+          "expectedVerseNumber": 13,
+          "actualVerseNumber": 14
+        },
+        {
+          "arrayPosition": 13,
+          "expectedVerseNumber": 14,
+          "actualVerseNumber": 15
+        },
+        {
+          "arrayPosition": 14,
+          "expectedVerseNumber": 15,
+          "actualVerseNumber": 16
+        },
+        {
+          "arrayPosition": 15,
+          "expectedVerseNumber": 16,
+          "actualVerseNumber": 18
+        },
+        {
+          "arrayPosition": 16,
+          "expectedVerseNumber": 17,
+          "actualVerseNumber": 19
+        },
+        {
+          "arrayPosition": 17,
+          "expectedVerseNumber": 18,
+          "actualVerseNumber": 20
+        },
+        {
+          "arrayPosition": 18,
+          "expectedVerseNumber": 19,
+          "actualVerseNumber": 21
+        },
+        {
+          "arrayPosition": 19,
+          "expectedVerseNumber": 20,
+          "actualVerseNumber": 22
+        },
+        {
+          "arrayPosition": 20,
+          "expectedVerseNumber": 21,
+          "actualVerseNumber": 23
+        },
+        {
+          "arrayPosition": 21,
+          "expectedVerseNumber": 22,
+          "actualVerseNumber": 24
+        },
+        {
+          "arrayPosition": 22,
+          "expectedVerseNumber": 23,
+          "actualVerseNumber": 25
+        },
+        {
+          "arrayPosition": 23,
+          "expectedVerseNumber": 24,
+          "actualVerseNumber": 26
+        },
+        {
+          "arrayPosition": 24,
+          "expectedVerseNumber": 25,
+          "actualVerseNumber": 27
+        },
+        {
+          "arrayPosition": 25,
+          "expectedVerseNumber": 26,
+          "actualVerseNumber": 28
+        },
+        {
+          "arrayPosition": 26,
+          "expectedVerseNumber": 27,
+          "actualVerseNumber": 29
+        },
+        {
+          "arrayPosition": 27,
+          "expectedVerseNumber": 28,
+          "actualVerseNumber": 31
+        },
+        {
+          "arrayPosition": 28,
+          "expectedVerseNumber": 29,
+          "actualVerseNumber": 32
+        },
+        {
+          "arrayPosition": 29,
+          "expectedVerseNumber": 30,
+          "actualVerseNumber": 33
+        },
+        {
+          "arrayPosition": 30,
+          "expectedVerseNumber": 31,
+          "actualVerseNumber": 34
+        },
+        {
+          "arrayPosition": 31,
+          "expectedVerseNumber": 32,
+          "actualVerseNumber": 35
+        },
+        {
+          "arrayPosition": 32,
+          "expectedVerseNumber": 33,
+          "actualVerseNumber": 36
+        },
+        {
+          "arrayPosition": 33,
+          "expectedVerseNumber": 34,
+          "actualVerseNumber": 37
+        },
+        {
+          "arrayPosition": 34,
+          "expectedVerseNumber": 35,
+          "actualVerseNumber": 38
+        },
+        {
+          "arrayPosition": 35,
+          "expectedVerseNumber": 36,
+          "actualVerseNumber": 39
+        },
+        {
+          "arrayPosition": 36,
+          "expectedVerseNumber": 37,
+          "actualVerseNumber": 40
+        },
+        {
+          "arrayPosition": 37,
+          "expectedVerseNumber": 38,
+          "actualVerseNumber": 41
+        },
+        {
+          "arrayPosition": 38,
+          "expectedVerseNumber": 39,
+          "actualVerseNumber": 42
+        },
+        {
+          "arrayPosition": 39,
+          "expectedVerseNumber": 40,
+          "actualVerseNumber": 43
+        },
+        {
+          "arrayPosition": 40,
+          "expectedVerseNumber": 41,
+          "actualVerseNumber": 44
+        },
+        {
+          "arrayPosition": 41,
+          "expectedVerseNumber": 42,
+          "actualVerseNumber": 45
+        },
+        {
+          "arrayPosition": 42,
+          "expectedVerseNumber": 43,
+          "actualVerseNumber": 46
+        },
+        {
+          "arrayPosition": 43,
+          "expectedVerseNumber": 44,
+          "actualVerseNumber": 47
+        }
+      ],
+      "missingContent": {
+        "sanskrit": 44,
+        "transliteration": 44
+      },
+      "fileSize": 19379
+    },
+    "chapter-02": {
+      "chapter": 2,
+      "verseCount": 72,
+      "actualVersesInArray": 72,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 72,
+        "transliteration": 72
+      },
+      "fileSize": 28176
+    },
+    "chapter-03": {
+      "chapter": 3,
+      "verseCount": 43,
+      "actualVersesInArray": 43,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 43,
+        "transliteration": 43
+      },
+      "fileSize": 17317
+    },
+    "chapter-04": {
+      "chapter": 4,
+      "verseCount": 42,
+      "actualVersesInArray": 42,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 42,
+        "transliteration": 42
+      },
+      "fileSize": 17074
+    },
+    "chapter-05": {
+      "chapter": 5,
+      "verseCount": 29,
+      "actualVersesInArray": 29,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 29,
+        "transliteration": 29
+      },
+      "fileSize": 12259
+    },
+    "chapter-06": {
+      "chapter": 6,
+      "verseCount": 47,
+      "actualVersesInArray": 47,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 47,
+        "transliteration": 47
+      },
+      "fileSize": 18834
+    },
+    "chapter-07": {
+      "chapter": 7,
+      "verseCount": 30,
+      "actualVersesInArray": 30,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 30,
+        "transliteration": 30
+      },
+      "fileSize": 11394
+    },
+    "chapter-08": {
+      "chapter": 8,
+      "verseCount": 26,
+      "actualVersesInArray": 26,
+      "match": true,
+      "verseNumberingIssues": [
+        {
+          "arrayPosition": 23,
+          "expectedVerseNumber": 24,
+          "actualVerseNumber": 26
+        },
+        {
+          "arrayPosition": 24,
+          "expectedVerseNumber": 25,
+          "actualVerseNumber": 27
+        },
+        {
+          "arrayPosition": 25,
+          "expectedVerseNumber": 26,
+          "actualVerseNumber": 28
+        }
+      ],
+      "missingContent": {
+        "sanskrit": 26,
+        "transliteration": 26
+      },
+      "fileSize": 12355
+    },
+    "chapter-09": {
+      "chapter": 9,
+      "verseCount": 34,
+      "actualVersesInArray": 34,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 34,
+        "transliteration": 34
+      },
+      "fileSize": 14218
+    },
+    "chapter-10": {
+      "chapter": 10,
+      "verseCount": 42,
+      "actualVersesInArray": 42,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 42,
+        "transliteration": 42
+      },
+      "fileSize": 16217
+    },
+    "chapter-11": {
+      "chapter": 11,
+      "verseCount": 55,
+      "actualVersesInArray": 55,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 55,
+        "transliteration": 55
+      },
+      "fileSize": 23228
+    },
+    "chapter-12": {
+      "chapter": 12,
+      "verseCount": 20,
+      "actualVersesInArray": 20,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 20,
+        "transliteration": 20
+      },
+      "fileSize": 9214
+    },
+    "chapter-13": {
+      "chapter": 13,
+      "verseCount": 32,
+      "actualVersesInArray": 32,
+      "match": true,
+      "verseNumberingIssues": [
+        {
+          "arrayPosition": 8,
+          "expectedVerseNumber": 9,
+          "actualVerseNumber": 12
+        },
+        {
+          "arrayPosition": 9,
+          "expectedVerseNumber": 10,
+          "actualVerseNumber": 13
+        },
+        {
+          "arrayPosition": 10,
+          "expectedVerseNumber": 11,
+          "actualVerseNumber": 14
+        },
+        {
+          "arrayPosition": 11,
+          "expectedVerseNumber": 12,
+          "actualVerseNumber": 15
+        },
+        {
+          "arrayPosition": 12,
+          "expectedVerseNumber": 13,
+          "actualVerseNumber": 16
+        },
+        {
+          "arrayPosition": 13,
+          "expectedVerseNumber": 14,
+          "actualVerseNumber": 17
+        },
+        {
+          "arrayPosition": 14,
+          "expectedVerseNumber": 15,
+          "actualVerseNumber": 18
+        },
+        {
+          "arrayPosition": 15,
+          "expectedVerseNumber": 16,
+          "actualVerseNumber": 19
+        },
+        {
+          "arrayPosition": 16,
+          "expectedVerseNumber": 17,
+          "actualVerseNumber": 20
+        },
+        {
+          "arrayPosition": 17,
+          "expectedVerseNumber": 18,
+          "actualVerseNumber": 21
+        },
+        {
+          "arrayPosition": 18,
+          "expectedVerseNumber": 19,
+          "actualVerseNumber": 22
+        },
+        {
+          "arrayPosition": 19,
+          "expectedVerseNumber": 20,
+          "actualVerseNumber": 23
+        },
+        {
+          "arrayPosition": 20,
+          "expectedVerseNumber": 21,
+          "actualVerseNumber": 24
+        },
+        {
+          "arrayPosition": 21,
+          "expectedVerseNumber": 22,
+          "actualVerseNumber": 25
+        },
+        {
+          "arrayPosition": 22,
+          "expectedVerseNumber": 23,
+          "actualVerseNumber": 26
+        },
+        {
+          "arrayPosition": 23,
+          "expectedVerseNumber": 24,
+          "actualVerseNumber": 27
+        },
+        {
+          "arrayPosition": 24,
+          "expectedVerseNumber": 25,
+          "actualVerseNumber": 28
+        },
+        {
+          "arrayPosition": 25,
+          "expectedVerseNumber": 26,
+          "actualVerseNumber": 29
+        },
+        {
+          "arrayPosition": 26,
+          "expectedVerseNumber": 27,
+          "actualVerseNumber": 30
+        },
+        {
+          "arrayPosition": 27,
+          "expectedVerseNumber": 28,
+          "actualVerseNumber": 31
+        },
+        {
+          "arrayPosition": 28,
+          "expectedVerseNumber": 29,
+          "actualVerseNumber": 32
+        },
+        {
+          "arrayPosition": 29,
+          "expectedVerseNumber": 30,
+          "actualVerseNumber": 33
+        },
+        {
+          "arrayPosition": 30,
+          "expectedVerseNumber": 31,
+          "actualVerseNumber": 34
+        },
+        {
+          "arrayPosition": 31,
+          "expectedVerseNumber": 32,
+          "actualVerseNumber": 35
+        }
+      ],
+      "missingContent": {
+        "sanskrit": 32,
+        "transliteration": 32
+      },
+      "fileSize": 14147
+    },
+    "chapter-14": {
+      "chapter": 14,
+      "verseCount": 26,
+      "actualVersesInArray": 26,
+      "match": true,
+      "verseNumberingIssues": [
+        {
+          "arrayPosition": 11,
+          "expectedVerseNumber": 12,
+          "actualVerseNumber": 13
+        },
+        {
+          "arrayPosition": 12,
+          "expectedVerseNumber": 13,
+          "actualVerseNumber": 14
+        },
+        {
+          "arrayPosition": 13,
+          "expectedVerseNumber": 14,
+          "actualVerseNumber": 15
+        },
+        {
+          "arrayPosition": 14,
+          "expectedVerseNumber": 15,
+          "actualVerseNumber": 16
+        },
+        {
+          "arrayPosition": 15,
+          "expectedVerseNumber": 16,
+          "actualVerseNumber": 17
+        },
+        {
+          "arrayPosition": 16,
+          "expectedVerseNumber": 17,
+          "actualVerseNumber": 18
+        },
+        {
+          "arrayPosition": 17,
+          "expectedVerseNumber": 18,
+          "actualVerseNumber": 19
+        },
+        {
+          "arrayPosition": 18,
+          "expectedVerseNumber": 19,
+          "actualVerseNumber": 20
+        },
+        {
+          "arrayPosition": 19,
+          "expectedVerseNumber": 20,
+          "actualVerseNumber": 21
+        },
+        {
+          "arrayPosition": 20,
+          "expectedVerseNumber": 21,
+          "actualVerseNumber": 22
+        },
+        {
+          "arrayPosition": 21,
+          "expectedVerseNumber": 22,
+          "actualVerseNumber": 23
+        },
+        {
+          "arrayPosition": 22,
+          "expectedVerseNumber": 23,
+          "actualVerseNumber": 24
+        },
+        {
+          "arrayPosition": 23,
+          "expectedVerseNumber": 24,
+          "actualVerseNumber": 25
+        },
+        {
+          "arrayPosition": 24,
+          "expectedVerseNumber": 25,
+          "actualVerseNumber": 26
+        },
+        {
+          "arrayPosition": 25,
+          "expectedVerseNumber": 26,
+          "actualVerseNumber": 27
+        }
+      ],
+      "missingContent": {
+        "sanskrit": 26,
+        "transliteration": 26
+      },
+      "fileSize": 12068
+    },
+    "chapter-15": {
+      "chapter": 15,
+      "verseCount": 20,
+      "actualVersesInArray": 20,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 20,
+        "transliteration": 20
+      },
+      "fileSize": 8619
+    },
+    "chapter-16": {
+      "chapter": 16,
+      "verseCount": 22,
+      "actualVersesInArray": 22,
+      "match": true,
+      "verseNumberingIssues": [
+        {
+          "arrayPosition": 1,
+          "expectedVerseNumber": 2,
+          "actualVerseNumber": 3
+        },
+        {
+          "arrayPosition": 2,
+          "expectedVerseNumber": 3,
+          "actualVerseNumber": 4
+        },
+        {
+          "arrayPosition": 3,
+          "expectedVerseNumber": 4,
+          "actualVerseNumber": 5
+        },
+        {
+          "arrayPosition": 4,
+          "expectedVerseNumber": 5,
+          "actualVerseNumber": 6
+        },
+        {
+          "arrayPosition": 5,
+          "expectedVerseNumber": 6,
+          "actualVerseNumber": 7
+        },
+        {
+          "arrayPosition": 6,
+          "expectedVerseNumber": 7,
+          "actualVerseNumber": 8
+        },
+        {
+          "arrayPosition": 7,
+          "expectedVerseNumber": 8,
+          "actualVerseNumber": 9
+        },
+        {
+          "arrayPosition": 8,
+          "expectedVerseNumber": 9,
+          "actualVerseNumber": 10
+        },
+        {
+          "arrayPosition": 9,
+          "expectedVerseNumber": 10,
+          "actualVerseNumber": 11
+        },
+        {
+          "arrayPosition": 10,
+          "expectedVerseNumber": 11,
+          "actualVerseNumber": 12
+        },
+        {
+          "arrayPosition": 11,
+          "expectedVerseNumber": 12,
+          "actualVerseNumber": 13
+        },
+        {
+          "arrayPosition": 12,
+          "expectedVerseNumber": 13,
+          "actualVerseNumber": 15
+        },
+        {
+          "arrayPosition": 13,
+          "expectedVerseNumber": 14,
+          "actualVerseNumber": 16
+        },
+        {
+          "arrayPosition": 14,
+          "expectedVerseNumber": 15,
+          "actualVerseNumber": 17
+        },
+        {
+          "arrayPosition": 15,
+          "expectedVerseNumber": 16,
+          "actualVerseNumber": 18
+        },
+        {
+          "arrayPosition": 16,
+          "expectedVerseNumber": 17,
+          "actualVerseNumber": 19
+        },
+        {
+          "arrayPosition": 17,
+          "expectedVerseNumber": 18,
+          "actualVerseNumber": 20
+        },
+        {
+          "arrayPosition": 18,
+          "expectedVerseNumber": 19,
+          "actualVerseNumber": 21
+        },
+        {
+          "arrayPosition": 19,
+          "expectedVerseNumber": 20,
+          "actualVerseNumber": 22
+        },
+        {
+          "arrayPosition": 20,
+          "expectedVerseNumber": 21,
+          "actualVerseNumber": 23
+        },
+        {
+          "arrayPosition": 21,
+          "expectedVerseNumber": 22,
+          "actualVerseNumber": 24
+        }
+      ],
+      "missingContent": {
+        "sanskrit": 22,
+        "transliteration": 22
+      },
+      "fileSize": 10603
+    },
+    "chapter-17": {
+      "chapter": 17,
+      "verseCount": 28,
+      "actualVersesInArray": 28,
+      "match": true,
+      "verseNumberingIssues": [],
+      "missingContent": {
+        "sanskrit": 28,
+        "transliteration": 28
+      },
+      "fileSize": 11487
+    },
+    "chapter-18": {
+      "chapter": 18,
+      "verseCount": 77,
+      "actualVersesInArray": 77,
+      "match": true,
+      "verseNumberingIssues": [
+        {
+          "arrayPosition": 51,
+          "expectedVerseNumber": 52,
+          "actualVerseNumber": 53
+        },
+        {
+          "arrayPosition": 52,
+          "expectedVerseNumber": 53,
+          "actualVerseNumber": 54
+        },
+        {
+          "arrayPosition": 53,
+          "expectedVerseNumber": 54,
+          "actualVerseNumber": 55
+        },
+        {
+          "arrayPosition": 54,
+          "expectedVerseNumber": 55,
+          "actualVerseNumber": 56
+        },
+        {
+          "arrayPosition": 55,
+          "expectedVerseNumber": 56,
+          "actualVerseNumber": 57
+        },
+        {
+          "arrayPosition": 56,
+          "expectedVerseNumber": 57,
+          "actualVerseNumber": 58
+        },
+        {
+          "arrayPosition": 57,
+          "expectedVerseNumber": 58,
+          "actualVerseNumber": 59
+        },
+        {
+          "arrayPosition": 58,
+          "expectedVerseNumber": 59,
+          "actualVerseNumber": 60
+        },
+        {
+          "arrayPosition": 59,
+          "expectedVerseNumber": 60,
+          "actualVerseNumber": 61
+        },
+        {
+          "arrayPosition": 60,
+          "expectedVerseNumber": 61,
+          "actualVerseNumber": 62
+        },
+        {
+          "arrayPosition": 61,
+          "expectedVerseNumber": 62,
+          "actualVerseNumber": 63
+        },
+        {
+          "arrayPosition": 62,
+          "expectedVerseNumber": 63,
+          "actualVerseNumber": 64
+        },
+        {
+          "arrayPosition": 63,
+          "expectedVerseNumber": 64,
+          "actualVerseNumber": 65
+        },
+        {
+          "arrayPosition": 64,
+          "expectedVerseNumber": 65,
+          "actualVerseNumber": 66
+        },
+        {
+          "arrayPosition": 65,
+          "expectedVerseNumber": 66,
+          "actualVerseNumber": 67
+        },
+        {
+          "arrayPosition": 66,
+          "expectedVerseNumber": 67,
+          "actualVerseNumber": 68
+        },
+        {
+          "arrayPosition": 67,
+          "expectedVerseNumber": 68,
+          "actualVerseNumber": 69
+        },
+        {
+          "arrayPosition": 68,
+          "expectedVerseNumber": 69,
+          "actualVerseNumber": 70
+        },
+        {
+          "arrayPosition": 69,
+          "expectedVerseNumber": 70,
+          "actualVerseNumber": 71
+        },
+        {
+          "arrayPosition": 70,
+          "expectedVerseNumber": 71,
+          "actualVerseNumber": 72
+        },
+        {
+          "arrayPosition": 71,
+          "expectedVerseNumber": 72,
+          "actualVerseNumber": 73
+        },
+        {
+          "arrayPosition": 72,
+          "expectedVerseNumber": 73,
+          "actualVerseNumber": 74
+        },
+        {
+          "arrayPosition": 73,
+          "expectedVerseNumber": 74,
+          "actualVerseNumber": 75
+        },
+        {
+          "arrayPosition": 74,
+          "expectedVerseNumber": 75,
+          "actualVerseNumber": 76
+        },
+        {
+          "arrayPosition": 75,
+          "expectedVerseNumber": 76,
+          "actualVerseNumber": 77
+        },
+        {
+          "arrayPosition": 76,
+          "expectedVerseNumber": 77,
+          "actualVerseNumber": 78
+        }
+      ],
+      "missingContent": {
+        "sanskrit": 77,
+        "transliteration": 77
+      },
+      "fileSize": 30455
+    }
+  },
+  "summary": {
+    "totalChapters": 18,
+    "totalVerses": 689,
+    "chaptersWithVerseNumberingIssues": [
+      1,
+      8,
+      13,
+      14,
+      16,
+      18
+    ],
+    "versesWithMissingContent": {
+      "sanskrit": 689,
+      "transliteration": 689
+    },
+    "fileSizes": {
+      "chapter-01": "18.92 KB",
+      "chapter-02": "27.52 KB",
+      "chapter-03": "16.91 KB",
+      "chapter-04": "16.67 KB",
+      "chapter-05": "11.97 KB",
+      "chapter-06": "18.39 KB",
+      "chapter-07": "11.13 KB",
+      "chapter-08": "12.07 KB",
+      "chapter-09": "13.88 KB",
+      "chapter-10": "15.84 KB",
+      "chapter-11": "22.68 KB",
+      "chapter-12": "9.00 KB",
+      "chapter-13": "13.82 KB",
+      "chapter-14": "11.79 KB",
+      "chapter-15": "8.42 KB",
+      "chapter-16": "10.35 KB",
+      "chapter-17": "11.22 KB",
+      "chapter-18": "29.74 KB"
+    }
+  }
+}
