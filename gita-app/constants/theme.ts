@@ -3,28 +3,38 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
+import { COLORS_DARK, COLORS_LIGHT } from "./colors";
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = COLORS_LIGHT.accent;
+const tintColorDark = COLORS_DARK.text;
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: COLORS_LIGHT.text,
+    background: COLORS_LIGHT.background,
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    icon: COLORS_LIGHT.secondary,
+    tabIconDefault: COLORS_LIGHT.tabBarInactive,
     tabIconSelected: tintColorLight,
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: COLORS_DARK.text,
+    background: COLORS_DARK.background,
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: COLORS_DARK.secondary,
+    tabIconDefault: COLORS_DARK.tabBarInactive,
     tabIconSelected: tintColorDark,
   },
+};
+
+/**
+ * App-specific colors with improved contrast ratios
+ * Uses centralized color constants from ./colors.ts
+ */
+export const AppColors = {
+  light: COLORS_LIGHT,
+  dark: COLORS_DARK,
 };
 
 /**
@@ -34,26 +44,26 @@ export const Colors = {
  */
 export const Fonts = {
   devanagari: {
-    regular: 'NotoSerifDevanagari-Regular',
-    semiBold: 'NotoSerifDevanagari-SemiBold',
-    bold: 'NotoSerifDevanagari-Bold',
+    regular: "NotoSerifDevanagari-Regular",
+    semiBold: "NotoSerifDevanagari-SemiBold",
+    bold: "NotoSerifDevanagari-Bold",
   },
   sans: {
-    regular: 'Merriweather-Regular',
-    bold: 'Merriweather-Bold',
-    italic: 'Merriweather-Italic',
+    regular: "Merriweather-Regular",
+    bold: "Merriweather-Bold",
+    italic: "Merriweather-Italic",
   },
   // Fallback for system fonts (web/other platforms)
   system: Platform.select({
     ios: {
-      sans: 'system-ui',
-      serif: 'ui-serif',
-      mono: 'ui-monospace',
+      sans: "system-ui",
+      serif: "ui-serif",
+      mono: "ui-monospace",
     },
     default: {
-      sans: 'normal',
-      serif: 'serif',
-      mono: 'monospace',
+      sans: "normal",
+      serif: "serif",
+      mono: "monospace",
     },
     web: {
       sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",

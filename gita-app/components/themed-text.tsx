@@ -1,12 +1,10 @@
-import { StyleSheet, Text, type TextProps } from 'react-native';
-
-import { useThemeColor } from '@/hooks/use-theme-color';
-import { Fonts } from '@/constants/theme';
+import { Text, type TextProps } from 'react-native';
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
   type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  className?: string;
 };
 
 export function ThemedText({
@@ -14,50 +12,25 @@ export function ThemedText({
   lightColor,
   darkColor,
   type = 'default',
+  className = '',
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const typeClasses = {
+    default: 'text-base leading-6',
+    defaultSemiBold: 'text-base leading-6 font-semibold',
+    title: 'text-3xl font-bold',
+    subtitle: 'text-2xl font-bold',
+    link: 'text-base leading-6 text-blue-600 dark:text-blue-400',
+  };
+
+  const typeClass = typeClasses[type] || '';
+  const combinedClassName = `${typeClass} ${className}`.trim();
 
   return (
     <Text
-      style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
-      ]}
+      style={style}
+      className={combinedClassName}
       {...rest}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontFamily: Fonts.sans.regular,
-  },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontFamily: Fonts.sans.bold,
-  },
-  title: {
-    fontSize: 32,
-    fontFamily: Fonts.sans.bold,
-    lineHeight: 32,
-  },
-  subtitle: {
-    fontSize: 20,
-    fontFamily: Fonts.sans.bold,
-  },
-  link: {
-    lineHeight: 30,
-    fontSize: 16,
-    fontFamily: Fonts.sans.regular,
-    color: '#0a7ea4',
-  },
-});

@@ -1,0 +1,111 @@
+/\*\*
+
+- Design System Theme Provider Setup
+-
+- This file documents how to use the unified design system throughout the app.
+-
+- USAGE GUIDE:
+- ============
+-
+- 1.  FOR COLORS - Use the useAppTheme hook:
+- ──────────────────────────────────────────
+- import { useAppTheme } from '@/hooks/use-app-theme';
+-
+- export default function MyComponent() {
+-      const { colors, isDark, resolvedTheme } = useAppTheme();
+-
+-      return (
+-        <View style={{ backgroundColor: colors.bg }}>
+-          <Text style={{ color: colors.text }}>Hello</Text>
+-        </View>
+-      );
+- }
+-
+- 2.  FOR TYPOGRAPHY - Use constants:
+- ──────────────────────────────────
+- import { fontSize, fontWeight, fontFamily, textStyles } from '@/constants/typography';
+-
+- const styles = StyleSheet.create({
+-      title: {
+-        ...textStyles.title,
+-        fontFamily: fontFamily.serif,
+-      }
+- });
+-
+- 3.  FOR SPACING - Use constants:
+- ────────────────────────────────
+- import { spacing, radius, layout } from '@/constants/spacing';
+-
+- const padding = spacing.lg; // 24px
+- const borderRadius = radius.md; // 12px
+-
+- 4.  FOR DYNAMIC TYPOGRAPHY - Use scaling:
+- ────────────────────────────────────────
+- import { createTypography } from '@/lib/typography';
+-
+- const prefs = usePreferencesState();
+- const typography = createTypography(prefs.fontSize);
+-
+- 5.  IMPORT EVERYTHING - Use designSystem:
+- ────────────────────────────────────────
+- import {
+-      fontSize, spacing, fontWeight, fontFamily,
+-      COLORS_LIGHT, COLORS_DARK, COLORS_SEPIA
+- } from '@/constants/designSystem';
+-
+-
+- AVAILABLE COLORS IN ThemePalette:
+- ═════════════════════════════════
+-
+- Main Colors:
+- - bg: background color
+- - text: primary text color
+- - secondary: secondary text color (dimmed)
+- - accent: primary brand color (#ff6b35)
+-
+- Surfaces:
+- - surface: card/container background
+- - surfaceSoft: subtle backgrounds (sections, groups)
+- - verseBox: verse card specific background
+- - section: section group backgrounds
+-
+- Variants:
+- - accentSoft: soft accent with transparency
+- - border: border and divider color
+-
+- Navigation:
+- - tabBarActive: active tab color
+- - tabBarInactive: inactive tab color
+-
+- Status:
+- - success: success/positive color
+-
+-
+- THEMES AVAILABLE:
+- ════════════════
+- 1.  light - Standard light theme
+- 2.  dark - Dark mode (OLED-friendly blacks)
+- 3.  sepia - Warm, paper-like theme
+- 4.  auto - System preference (default)
+-
+-
+- SPACING SCALE:
+- ══════════════
+- xs: 8px - tight spacing
+- sm: 12px - small spacing
+- md: 16px - medium spacing
+- lg: 24px - large spacing
+- xl: 32px - extra large
+- xxl: 48px - hero sections
+-
+-
+- RADIUS SCALE:
+- ═════════════
+- sm: 8px - small buttons, chips
+- md: 12px - standard buttons
+- lg: 16px - cards, modals
+- xl: 20px - large modals
+- full: 9999 - circles
+  \*/
+
+export {};

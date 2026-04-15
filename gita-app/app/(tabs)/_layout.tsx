@@ -1,16 +1,26 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Text } from 'react-native';
-import { useApp } from '@/src/context/AppContext';
+import { useAppTheme } from "@/hooks/use-app-theme";
+import { ROUTES } from "@/src/navigation/routes";
+import { getStandardHeaderOptions } from "@/src/navigation/headerConfig";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import React from "react";
 
 export default function TabLayout() {
-  const { theme } = useApp();
-  const isDark = theme.isDark;
+  const { colors } = useAppTheme();
 
-  const tabBarBackgroundColor = isDark ? '#1a1a1a' : '#ffffff';
-  const tabBarActiveTintColor = '#8B4513';
-  const tabBarInactiveTintColor = isDark ? '#666666' : '#999999';
-  const tabBarBorderColor = isDark ? '#333333' : '#eeeeee';
+  const tabBarBackgroundColor = colors.bg;
+  const tabBarActiveTintColor = colors.tabBarActive;
+  const tabBarInactiveTintColor = colors.tabBarInactive;
+  const tabBarBorderColor = colors.border;
+  const headerOptions = getStandardHeaderOptions(colors);
+
+  const TabIcon = ({
+    name,
+    color,
+  }: {
+    name: React.ComponentProps<typeof MaterialIcons>["name"];
+    color: string;
+  }) => <MaterialIcons name={name} size={24} color={color} />;
 
   return (
     <Tabs
@@ -18,15 +28,7 @@ export default function TabLayout() {
         tabBarActiveTintColor,
         tabBarInactiveTintColor,
         headerShown: true,
-        headerStyle: {
-          backgroundColor: tabBarBackgroundColor,
-          borderBottomColor: tabBarBorderColor,
-          borderBottomWidth: 1,
-        },
-        headerTintColor: isDark ? '#ffffff' : '#000000',
-        headerTitleStyle: {
-          fontWeight: '600',
-        },
+        ...headerOptions,
         tabBarStyle: {
           backgroundColor: tabBarBackgroundColor,
           borderTopColor: tabBarBorderColor,
@@ -37,31 +39,62 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Bhagavad Gita',
-          href: '/',
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>📖</Text>,
+          title: "Bhagavad Gita",
+          href: ROUTES.TABS_HOME,
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color }) => (
+            <TabIcon name="auto-stories" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="chapters"
         options={{
-          title: 'Chapters',
-          href: '/chapters-tab',
-          tabBarLabel: 'Chapters',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>📚</Text>,
+          title: "Chapters",
+          href: ROUTES.CHAPTERS,
+          tabBarLabel: "Chapters",
+          tabBarIcon: ({ color }) => <TabIcon name="menu-book" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          href: ROUTES.SEARCH,
+          tabBarLabel: "Search",
+          tabBarIcon: ({ color }) => <TabIcon name="search" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="journal"
+        options={{
+          title: "Journal",
+          href: ROUTES.JOURNAL,
+          tabBarLabel: "Journal",
+          tabBarIcon: ({ color }) => <TabIcon name="book" color={color} />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Settings',
-          href: '/explore',
-          tabBarLabel: 'Settings',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>⚙️</Text>,
+          title: "Settings",
+          href: null, // Hidden from tab bar
+        }}
+      />
+      <Tabs.Screen
+        name="reading"
+        options={{
+          title: "Reading",
+          href: null, // Hidden from tab bar
+        }}
+      />
+      <Tabs.Screen
+        name="verse"
+        options={{
+          title: "Verse",
+          href: null, // Hidden from tab bar
         }}
       />
     </Tabs>
   );
 }
-

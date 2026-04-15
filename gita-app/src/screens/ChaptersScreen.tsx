@@ -1,106 +1,182 @@
 /**
- * Chapters Screen
- * Minimal list of all 18 chapters
+ * Chapters List Screen
  */
 
-import React from 'react';
+import gitaData from "@/assets/data.json";
+import { Card } from "@/components/ui/card";
+import { radius, spacing } from "@/constants/spacing";
+import { fontSize, fontWeight } from "@/constants/typography";
+import { useAppTheme } from "@/hooks/use-app-theme";
+import { ScreenHeader } from "@/src/components/ScreenHeader";
+import { useAppStore } from "@/src/store/appStore";
+import type { ChaptersScreenProps } from "@/src/types/navigation";
+import { MaterialIcons } from "@expo/vector-icons";
+import { FlashList } from "@shopify/flash-list";
+import * as Haptics from "expo-haptics";
+import React, { useMemo } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  ListRenderItem,
-} from 'react-native';
-import type { ChaptersScreenProps } from '@/src/types/navigation';
-import { useApp } from '@/src/context/AppContext';
-import { getChapters } from '@/src/utils/gitaData';
-import type { ChapterSummary, LangKey } from '@/src/types';
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const colors = {
-  light: {
-    bg: '#ffffff',
-    text: '#111111',
-    muted: '#6b6b6b',
-    divider: '#e9e9e9',
-  },
-  dark: {
-    bg: '#0f0f0f',
-    text: '#f5f5f5',
-    muted: '#9a9a9a',
-    divider: '#2a2a2a',
-  },
-};
-
-function getLocalizedText(text: Record<LangKey, string>, lang: LangKey): string {
-  return text[lang] || text.english;
+interface ChapterData {
+  chapter: number;
+  name: { english: string; hindi: string };
+  verse_count: number;
 }
 
 export default function ChaptersScreen({ navigation }: ChaptersScreenProps) {
-  const { theme, language } = useApp();
-  const color = theme.isDark ? colors.dark : colors.light;
-  const chapters = getChapters();
+  const { colors, isDark } = useAppTheme();
+  const insets = useSafeAreaInsets();
+  const { currentChapter, isChapterComplete } = useAppStore();
 
-  const renderItem: ListRenderItem<ChapterSummary> = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Reading', { chapterId: item.chapter, verseId: 1 })}
-      style={[styles.row, { borderBottomColor: color.divider }]}
-    >
-      <Text style={[styles.chapterNumber, { color: color.muted }]}>#{item.chapter}</Text>
-      <Text style={[styles.chapterName, { color: color.text }]}>
-        {getLocalizedText(item.name, language)}
-      </Text>
-    </TouchableOpacity>
+  const chapters: ChapterData[] = useMemo(() => {
+    return (gitaData as any[]).map((chapter: any) => ({
+      chapter: chapter.chapter,
+      name: chapter.name,
+      verse_count: chapter.verse_count,
+    }));
+  }, []);
+  const totalVerses = useMemo(
+    () => chapters.reduce((sum, chapter) => sum + chapter.verse_count, 0),
+    [chapters],
   );
 
+  const handleChapterPress = async (chapter: ChapterData) => {
+    await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    navigation.navigate("SlokaList", {
+      chapterId: chapter.chapter,
+      chapterName: chapter.name.english,
+      verseCount: chapter.verse_count,
+    });
+  };
+
   return (
-    <View style={[styles.container, { backgroundColor: color.bg }]}>
-      <Text style={[styles.title, { color: color.text }]}
-        accessibilityRole="header"
-      >
-        {language === 'english' ? 'Chapters' : 'अध्याय'}
-      </Text>
-      <FlatList
+    <View style={[styles.container, { backgroundColor: colors.bg }]}>
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
+      <ScreenHeader title="Chapters" onBack={() => navigation.goBack()} />
+
+      <View style={styles.summaryWrap}>
+        <Text style={[styles.summaryText, { color: colors.textSecondary }]}>
+          18 chapters • {totalVerses} verses
+        </Text>
+      </View>
+
+      <FlashList
         data={chapters}
+        numColumns={2}
         keyExtractor={(item) => `chapter-${item.chapter}`}
-        renderItem={renderItem}
-        contentContainerStyle={styles.list}
+        contentContainerStyle={{
+          paddingHorizontal: spacing.sm,
+          paddingTop: spacing.xs,
+          paddingBottom: insets.bottom + spacing.xl,
+        }}
+        renderItem={({ item }) => {
+          const selected = item.chapter === currentChapter;
+          const completed = isChapterComplete(item.chapter);
+
+          return (
+            <TouchableOpacity
+              onPress={() => handleChapterPress(item)}
+              activeOpacity={0.8}
+              style={styles.cardTouch}
+            >
+              <Card
+                style={[
+                  styles.card,
+                  {
+                    backgroundColor: colors.surface,
+                    borderColor: selected ? colors.accent : colors.border,
+                    borderWidth: selected ? 2 : 1,
+                  },
+                ]}
+              >
+                <View style={styles.cardTop}>
+                  <View
+                    style={[
+                      styles.badge,
+                      { backgroundColor: colors.accentSoft },
+                    ]}
+                  >
+                    <Text style={[styles.badgeText, { color: colors.accent }]}>
+                      #{item.chapter}
+                    </Text>
+                  </View>
+                  {completed ? (
+                    <MaterialIcons
+                      name="check-circle"
+                      size={18}
+                      color={colors.success}
+                    />
+                  ) : null}
+                </View>
+
+                <Text
+                  style={[styles.title, { color: colors.text }]}
+                  numberOfLines={2}
+                >
+                  {item.name.english}
+                </Text>
+                <Text
+                  style={[styles.subtitle, { color: colors.textSecondary }]}
+                >
+                  {item.verse_count} verses
+                </Text>
+              </Card>
+            </TouchableOpacity>
+          );
+        }}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: { flex: 1 },
+  summaryWrap: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.xs,
+  },
+  summaryText: {
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
+  },
+  cardTouch: {
     flex: 1,
+    marginHorizontal: spacing.xs,
+    marginBottom: spacing.md,
+  },
+  card: {
+    minHeight: 150,
+    padding: spacing.md,
+    justifyContent: "space-between",
+  },
+  cardTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  badge: {
+    paddingHorizontal: spacing.xs,
+    paddingVertical: spacing.xs / 2,
+    borderRadius: radius.sm,
+  },
+  badgeText: {
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.bold,
   },
   title: {
-    fontSize: 20,
-    fontWeight: '600',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 8,
+    fontSize: fontSize.md,
+    fontWeight: fontWeight.semibold,
+    lineHeight: 22,
   },
-  list: {
-    paddingHorizontal: 8,
-    paddingBottom: 16,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    gap: 12,
-  },
-  chapterNumber: {
-    fontSize: 12,
-    fontWeight: '600',
-    width: 36,
-  },
-  chapterName: {
-    fontSize: 16,
-    fontWeight: '500',
-    flex: 1,
+  subtitle: {
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
   },
 });

@@ -1,12 +1,10 @@
-import { StyleSheet, Text, type TextProps } from 'react-native';
-
-import { useThemeColor } from '@/hooks/use-theme-color';
-import { Fonts } from '@/constants/theme';
+import { Text, type TextProps } from 'react-native';
 
 export type DevanagariTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
   type?: 'default' | 'verse' | 'title' | 'subtitle';
+  className?: string;
 };
 
 /**
@@ -18,44 +16,24 @@ export function DevanagariText({
   lightColor,
   darkColor,
   type = 'default',
+  className = '',
   ...rest
 }: DevanagariTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const typeClasses = {
+    default: 'text-base leading-7',
+    verse: 'text-lg leading-8',
+    title: 'text-2xl leading-10 font-bold',
+    subtitle: 'text-xl leading-8 font-semibold',
+  };
+
+  const typeClass = typeClasses[type] || '';
+  const combinedClassName = `${typeClass} ${className}`.trim();
 
   return (
     <Text
-      style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'verse' ? styles.verse : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        style,
-      ]}
+      style={style}
+      className={combinedClassName}
       {...rest}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 28,
-    fontFamily: Fonts.devanagari.regular,
-  },
-  verse: {
-    fontSize: 18,
-    lineHeight: 32,
-    fontFamily: Fonts.devanagari.regular,
-  },
-  title: {
-    fontSize: 28,
-    lineHeight: 40,
-    fontFamily: Fonts.devanagari.bold,
-  },
-  subtitle: {
-    fontSize: 20,
-    lineHeight: 32,
-    fontFamily: Fonts.devanagari.semiBold,
-  },
-});

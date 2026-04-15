@@ -3,9 +3,12 @@
  * Type-safe navigation with route parameters
  */
 
-import type { StackScreenProps } from '@react-navigation/stack';
-import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import type { CompositeScreenProps } from '@react-navigation/native';
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import type {
+    CompositeScreenProps,
+    NavigationProp,
+} from "@react-navigation/native";
+import type { StackScreenProps } from "@react-navigation/stack";
 
 /**
  * Root Stack Navigator Param List
@@ -15,14 +18,30 @@ export type RootStackParamList = {
   Home: undefined;
   Tabs: undefined;
   Chapters: undefined;
+  SlokaList: {
+    chapterId: number;
+    chapterName: string;
+    verseCount: number;
+  };
   Reading: {
     chapterId: number;
     verseId: number;
+    chapterName: string;
   };
   Settings: undefined;
   Modal: {
     title?: string;
     content?: string;
+  };
+  Paywall: undefined;
+  SanskritTooltip: {
+    term: string;
+    meaning: string;
+  };
+  FocusMode: {
+    chapterId: number;
+    verseId: number;
+    chapterName: string;
   };
 };
 
@@ -38,32 +57,30 @@ export type TabsParamList = {
 /**
  * Type-safe screen props for Root Stack screens
  */
-export type HomeScreenProps = StackScreenProps<RootStackParamList, 'Home'>;
-export type TabsScreenProps = StackScreenProps<RootStackParamList, 'Tabs'>;
-export type ChaptersScreenProps = StackScreenProps<RootStackParamList, 'Chapters'>;
-export type ReadingScreenProps = StackScreenProps<RootStackParamList, 'Reading'>;
-export type SettingsScreenProps = StackScreenProps<RootStackParamList, 'Settings'>;
-export type ModalScreenProps = StackScreenProps<RootStackParamList, 'Modal'>;
-
-/**
- * Type-safe screen props for Tab screens
- * Combines tab navigation with stack navigation for nested navigators
- */
-export type IndexTabScreenProps = CompositeScreenProps<
-  BottomTabScreenProps<TabsParamList, 'Index'>,
-  StackScreenProps<RootStackParamList>
+export type HomeScreenProps = StackScreenProps<RootStackParamList, "Home">;
+export type TabsScreenProps = StackScreenProps<RootStackParamList, "Tabs">;
+export type ChaptersScreenProps = StackScreenProps<
+  RootStackParamList,
+  "Chapters"
 >;
+export type SlokaListScreenProps = StackScreenProps<
+  RootStackParamList,
+  "SlokaList"
+>;
+export type ReadingScreenProps = StackScreenProps<
+  RootStackParamList,
+  "Reading"
+>;
+export type SettingsScreenProps = StackScreenProps<
+  RootStackParamList,
+  "Settings"
+>;
+export type ModalScreenProps = StackScreenProps<RootStackParamList, "Modal">;
 
 export type ExploreTabScreenProps = CompositeScreenProps<
-  BottomTabScreenProps<TabsParamList, 'Explore'>,
+  BottomTabScreenProps<TabsParamList, "Explore">,
   StackScreenProps<RootStackParamList>
 >;
-
-/**
- * Navigation prop types for use with hooks
- * Import and use like: const navigation = useNavigation<RootStackNavigationProp>();
- */
-import type { NavigationProp } from '@react-navigation/native';
 
 export type RootStackNavigationProp = NavigationProp<RootStackParamList>;
 export type TabsNavigationProp = NavigationProp<TabsParamList>;
@@ -73,6 +90,7 @@ export type TabsNavigationProp = NavigationProp<TabsParamList>;
  */
 declare global {
   namespace ReactNavigation {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     interface RootParamList extends RootStackParamList {}
   }
 }

@@ -87,8 +87,8 @@ export function hasTranslation(
 /**
  * Type helper: Get available languages for a verse
  */
-export function getAvailableLanguages(verse: Verse): Array<keyof LocalizableText> {
-  const languages: Array<keyof LocalizableText> = [];
+export function getAvailableLanguages(verse: Verse): (keyof LocalizableText)[] {
+  const languages: (keyof LocalizableText)[] = [];
   
   if (verse.translations.english) languages.push('english');
   if (verse.translations.hindi) languages.push('hindi');

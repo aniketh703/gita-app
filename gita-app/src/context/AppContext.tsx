@@ -1,91 +1,83 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AppContextType, LangKey, AppTheme } from '@/src/types';
+import { useAppTheme } from "@/hooks/use-app-theme";
+import {
+    usePreferences,
+    usePreferencesState,
+} from "@/src/context/PreferencesContext";
+import { AppContextType, AppTheme, LangKey } from "@/src/types";
+import React, { createContext, useCallback, useContext, useMemo } from "react";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const STORAGE_KEYS = {
-  LANGUAGE: 'gita_language',
-  THEME: 'gita_theme',
-  FONT_SIZE: 'gita_font_size',
-  TRANSLITERATION: 'gita_transliteration',
-};
-
-const DEFAULT_VALUES = {
-  language: 'english' as LangKey,
-  theme: { isDark: false },
-  fontSize: 16,
-  showTransliteration: false,
-};
-
+/**
+ * AppProvider - Adapter/bridge from old AppContext to new PreferencesContext
+ *
+ * This maintains backward compatibility with existing components while
+ * allowing migration to PreferencesContext over time.
+ *
+ * Translation:
+ * - AppContext.theme.isDark → Derived from PreferencesContext.theme + system theme
+ * - AppContext.language → PreferencesContext.language
+ * - AppContext.fontSize → PreferencesContext.fontSize
+ * - AppContext.showTransliteration → PreferencesContext.toggles.showTransliteration
+ */
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<LangKey>(DEFAULT_VALUES.language);
-  const [theme, setThemeState] = useState<AppTheme>(DEFAULT_VALUES.theme);
-  const [fontSize, setFontSizeState] = useState(DEFAULT_VALUES.fontSize);
-  const [showTransliteration, setShowTransliterationState] = useState(
-    DEFAULT_VALUES.showTransliteration
+  const prefs = usePreferencesState();
+  const { setLanguage, setFontSize, setTheme, setToggle } = usePreferences();
+  const { isDark } = useAppTheme();
+
+  // Memoize setters to prevent unnecessary re-renders
+  const setAppLanguage = useCallback(
+    async (lang: LangKey) => {
+      await setLanguage(lang);
+    },
+    [setLanguage],
   );
-  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load persisted settings
-  useEffect(() => {
-    async function loadSettings() {
-      try {
-        const [lang, themeStr, sizeStr, translitStr] = await Promise.all([
-          AsyncStorage.getItem(STORAGE_KEYS.LANGUAGE),
-          AsyncStorage.getItem(STORAGE_KEYS.THEME),
-          AsyncStorage.getItem(STORAGE_KEYS.FONT_SIZE),
-          AsyncStorage.getItem(STORAGE_KEYS.TRANSLITERATION),
-        ]);
+  const setAppTheme = useCallback(
+    async (newTheme: AppTheme) => {
+      // Convert isDark boolean to preference theme string
+      const themeMode = newTheme.isDark ? "dark" : "light";
+      await setTheme(themeMode);
+    },
+    [setTheme],
+  );
 
-        if (lang) setLanguageState(lang as LangKey);
-        if (themeStr) setThemeState(JSON.parse(themeStr));
-        if (sizeStr) setFontSizeState(parseInt(sizeStr, 10));
-        if (translitStr) setShowTransliterationState(translitStr === 'true');
-      } catch (error) {
-        console.error('Failed to load settings:', error);
-      } finally {
-        setIsLoaded(true);
-      }
-    }
+  const setAppFontSize = useCallback(
+    async (size: number) => {
+      await setFontSize(size);
+    },
+    [setFontSize],
+  );
 
-    loadSettings();
-  }, []);
+  const setAppShowTransliteration = useCallback(
+    async (show: boolean) => {
+      await setToggle("showTransliteration", show);
+    },
+    [setToggle],
+  );
 
-  const setLanguage = async (lang: LangKey) => {
-    setLanguageState(lang);
-    await AsyncStorage.setItem(STORAGE_KEYS.LANGUAGE, lang);
-  };
-
-  const setTheme = async (newTheme: AppTheme) => {
-    setThemeState(newTheme);
-    await AsyncStorage.setItem(STORAGE_KEYS.THEME, JSON.stringify(newTheme));
-  };
-
-  const setFontSize = async (size: number) => {
-    setFontSizeState(size);
-    await AsyncStorage.setItem(STORAGE_KEYS.FONT_SIZE, size.toString());
-  };
-
-  const setShowTransliteration = async (show: boolean) => {
-    setShowTransliterationState(show);
-    await AsyncStorage.setItem(STORAGE_KEYS.TRANSLITERATION, show.toString());
-  };
-
-  if (!isLoaded) {
-    return null; // or a splash screen
-  }
-
-  const value: AppContextType = {
-    language,
-    setLanguage,
-    theme,
-    setTheme,
-    fontSize,
-    setFontSize,
-    showTransliteration,
-    setShowTransliteration,
-  };
+  const value: AppContextType = useMemo(
+    () => ({
+      language: prefs.language,
+      setLanguage: setAppLanguage,
+      theme: { isDark },
+      setTheme: setAppTheme,
+      fontSize: prefs.fontSize,
+      setFontSize: setAppFontSize,
+      showTransliteration: prefs.toggles.showTransliteration,
+      setShowTransliteration: setAppShowTransliteration,
+    }),
+    [
+      prefs.language,
+      prefs.fontSize,
+      prefs.toggles.showTransliteration,
+      isDark,
+      setAppLanguage,
+      setAppTheme,
+      setAppFontSize,
+      setAppShowTransliteration,
+    ],
+  );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
@@ -93,7 +85,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 export function useApp(): AppContextType {
   const context = useContext(AppContext);
   if (!context) {
-    throw new Error('useApp must be used within AppProvider');
+    throw new Error("useApp must be used within AppProvider");
   }
   return context;
 }

@@ -59,6 +59,7 @@ gita-app/
 ### Installation
 
 1. Navigate to project:
+
    ```bash
    cd gita-app
    ```
@@ -77,6 +78,7 @@ npm start
 ```
 
 Then:
+
 - Press `a` for Android
 - Scan QR code with Expo Go app on your Android device
 
@@ -157,7 +159,8 @@ Gita content bundled in `assets/data.json`:
 
 - **Home** (`/`) - Home screen with welcome and statistics
 - **Chapters** (`/chapters`) - Browse all chapters
-- **Reading** (`/reading?ch=1&verse=1`) - Read individual verses
+- **Reading List** (`/reading?ch=1`) - Read verses in a chapter
+- **Verse Detail** (`/verse?ch=1&verse=1`) - Read an individual verse
 - **Settings** (`/settings`) - Manage preferences
 
 ## AppContext Usage
@@ -165,7 +168,8 @@ Gita content bundled in `assets/data.json`:
 State is managed via React Context in `src/context/AppContext.tsx`:
 
 ```typescript
-const { language, setLanguage, theme, setTheme, fontSize, setFontSize } = useApp();
+const { language, setLanguage, theme, setTheme, fontSize, setFontSize } =
+  useApp();
 ```
 
 All settings are persisted to AsyncStorage automatically.
@@ -228,7 +232,6 @@ These features are planned for future releases.
 **Version**: 1.0.0  
 **Status**: Beta (Ready for Testing)  
 **Target Platform**: Android
-
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
