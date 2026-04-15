@@ -80,13 +80,15 @@ export async function saveReadingProgress(
       verse,
       timestamp: Date.now(),
     };
+
+    // Update stats first (which also does a setItem)
+    await updateReadingStats(chapter, verse);
+
+    // Then save progress
     await AsyncStorage.setItem(
       STORAGE_KEYS.READING_PROGRESS,
       JSON.stringify(progress),
     );
-
-    // Update stats
-    await updateReadingStats(chapter, verse);
   } catch (error) {
     console.error("Failed to save reading progress:", error);
   }
@@ -158,15 +160,19 @@ export async function removeBookmarkByVerse(
 ): Promise<boolean> {
   try {
     const bookmarks = await getBookmarks();
-    const matchedBookmark = bookmarks.find(
-      (bookmark) => bookmark.chapter === chapter && bookmark.verse === verse,
+    const initialLength = bookmarks.length;
+    const filtered = bookmarks.filter(
+      (b) => !(b.chapter === chapter && b.verse === verse),
     );
 
-    if (!matchedBookmark) {
+    if (filtered.length === initialLength) {
       return false;
     }
 
-    await removeBookmark(matchedBookmark.id);
+    await AsyncStorage.setItem(
+      STORAGE_KEYS.BOOKMARKS,
+      JSON.stringify(filtered),
+    );
     return true;
   } catch (error) {
     console.error("Failed to remove bookmark by verse:", error);
@@ -354,18 +360,16 @@ export async function markChapterComplete(
     };
 
     completions.push(completion);
-    await AsyncStorage.setItem(
-      STORAGE_KEYS.COMPLETED_CHAPTERS,
-      JSON.stringify(completions),
-    );
 
     // Update stats
     const stats = await getReadingStats();
     stats.totalChaptersCompleted = completions.length;
-    await AsyncStorage.setItem(
-      STORAGE_KEYS.READING_STATS,
-      JSON.stringify(stats),
-    );
+
+    // Use multiSet to save both in one go
+    await AsyncStorage.multiSet([
+      [STORAGE_KEYS.COMPLETED_CHAPTERS, JSON.stringify(completions)],
+      [STORAGE_KEYS.READING_STATS, JSON.stringify(stats)],
+    ]);
   } catch (error) {
     console.error("Failed to mark chapter complete:", error);
   }
