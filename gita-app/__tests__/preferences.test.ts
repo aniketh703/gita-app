@@ -103,6 +103,7 @@ describe("Preferences Utilities", () => {
     });
 
     it("should return defaults on storage error", async () => {
+      const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
       (AsyncStorage.getItem as jest.Mock).mockRejectedValue(
         new Error("Storage error"),
       );
@@ -110,6 +111,8 @@ describe("Preferences Utilities", () => {
       const prefs = await loadPreferences();
 
       expect(prefs).toEqual(DEFAULT_PREFERENCES);
+      expect(consoleErrorSpy).toHaveBeenCalled();
+      consoleErrorSpy.mockRestore();
     });
   });
 
@@ -136,12 +139,15 @@ describe("Preferences Utilities", () => {
     });
 
     it("should throw on save error", async () => {
+      const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
       const prefs = DEFAULT_PREFERENCES;
       (AsyncStorage.setItem as jest.Mock).mockRejectedValue(
         new Error("Save failed"),
       );
 
       await expect(savePreferences(prefs)).rejects.toThrow("Save failed");
+      expect(consoleErrorSpy).toHaveBeenCalled();
+      consoleErrorSpy.mockRestore();
     });
   });
 
@@ -334,11 +340,14 @@ describe("Preferences Utilities", () => {
     });
 
     it("should throw on clear error", async () => {
+      const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
       (AsyncStorage.multiRemove as jest.Mock).mockRejectedValue(
         new Error("Clear failed"),
       );
 
       await expect(clearPreferences()).rejects.toThrow("Clear failed");
+      expect(consoleErrorSpy).toHaveBeenCalled();
+      consoleErrorSpy.mockRestore();
     });
   });
 });

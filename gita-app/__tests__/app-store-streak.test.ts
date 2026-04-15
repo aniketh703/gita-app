@@ -41,6 +41,7 @@ describe("app store reading streak", () => {
         lastStreakDate: "",
         longestStreak: 0,
         totalDaysRead: 0,
+        streakShields: 1,
         readings: {},
       },
     }));
@@ -79,6 +80,7 @@ describe("app store reading streak", () => {
         longestStreak: 4,
         lastStreakDate: yesterday,
         totalDaysRead: 1,
+        streakShields: 1,
         readings: { [yesterday]: 2 },
       },
     }));
@@ -99,6 +101,7 @@ describe("app store reading streak", () => {
         longestStreak: 9,
         lastStreakDate: threeDaysAgo,
         totalDaysRead: 10,
+        streakShields: 1,
         readings: { [threeDaysAgo]: 1 },
       },
     }));
