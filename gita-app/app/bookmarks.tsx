@@ -3,39 +3,32 @@
  * Display all bookmarked verses
  */
 
+import React, { useState, useCallback } from 'react';
+import { View, FlatList, TouchableOpacity } from 'react-native';
+import { useRouter, useFocusEffect } from 'expo-router';
+import { usePreferencesState } from '@/src/context/PreferencesContext';
+import { useApp } from '@/src/context/AppContext';
+import { Text } from '@/components/ui/text';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { AnimatedCard } from '@/components/ui/animated-pressable';
+import { Toast, useToast } from '@/components/ui/toast';
+import { getBookmarks, removeBookmark, type Bookmark } from '@/src/utils/readingProgress';
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Card, CardContent } from "@/components/ui/card";
-import { Text } from "@/components/ui/text";
-import { Toast, useToast } from "@/components/ui/toast";
-import { radius, spacing } from "@/constants/spacing";
-import { fontSize, fontWeight } from "@/constants/typography";
-import { useAppTheme } from "@/hooks/use-app-theme";
-import { useApp } from "@/src/context/AppContext";
-import { usePreferencesState } from "@/src/context/PreferencesContext";
-import { verseRoute } from "@/src/navigation/routes";
-import {
-    getBookmarks,
-    removeBookmark,
-    type Bookmark,
-} from "@/src/utils/readingProgress";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useFocusEffect, useRouter } from "expo-router";
-import React, { useCallback, useState } from "react";
-import { FlatList, TouchableOpacity, View } from "react-native";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 export default function BookmarksScreen() {
   const prefs = usePreferencesState();
   const { language } = useApp();
-  const { colors } = useAppTheme();
   const router = useRouter();
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [loading, setLoading] = useState(true);
@@ -57,7 +50,7 @@ export default function BookmarksScreen() {
   useFocusEffect(
     useCallback(() => {
       loadBookmarks();
-    }, [loadBookmarks]),
+    }, [loadBookmarks])
   );
 
   const handleRemoveBookmark = async (bookmark: Bookmark) => {
@@ -65,22 +58,20 @@ export default function BookmarksScreen() {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmark.id));
     setDeleteBookmark(null);
     showToast(
-      language === "english" ? "Bookmark removed" : "बुकमार्क हटाया गया",
-      "success",
+      language === 'english' ? 'Bookmark removed' : 'बुकमार्क हटाया गया',
+      'success'
     );
   };
 
   const handleBookmarkPress = (bookmark: Bookmark) => {
-    router.push(verseRoute(bookmark.chapter, bookmark.verse));
+    router.push(`/verse?ch=${bookmark.chapter}&verse=${bookmark.verse}`);
   };
 
   if (loading) {
     return (
       <View className="flex-1 bg-gita-bg dark:bg-gita-dark-bg justify-center items-center">
         <Text className="text-gita-secondary dark:text-gita-dark-secondary">
-          {language === "english"
-            ? "Loading bookmarks..."
-            : "बुकमार्क लोड हो रहे हैं..."}
+          {language === 'english' ? 'Loading bookmarks...' : 'बुकमार्क लोड हो रहे हैं...'}
         </Text>
       </View>
     );
@@ -95,42 +86,24 @@ export default function BookmarksScreen() {
             style={{ fontSize: Math.min(24, prefs.fontSize + 8) }}
             accessibilityRole="header"
           >
-            {language === "english" ? "Bookmarks" : "बुकमार्क"}
+            {language === 'english' ? 'Bookmarks' : 'बुकमार्क'}
           </Text>
         </View>
         <View className="flex-1 justify-center items-center px-6">
-          <View
-            style={{
-              width: 96,
-              height: 96,
-              borderRadius: radius.full,
-              backgroundColor: `${colors.accent}20`,
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: spacing.lg,
-            }}
-          >
-            <MaterialIcons
-              name="bookmark-border"
-              size={48}
-              color={colors.accent}
-            />
-          </View>
+          <Text className="text-6xl mb-4">⭐</Text>
           <Text
             className="text-center text-gita-text dark:text-gita-dark-text text-lg font-semibold mb-2"
             style={{ fontSize: Math.min(18, prefs.fontSize) }}
           >
-            {language === "english"
-              ? "No Bookmarks Yet"
-              : "अभी तक कोई बुकमार्क नहीं"}
+            {language === 'english' ? 'No Bookmarks Yet' : 'अभी तक कोई बुकमार्क नहीं'}
           </Text>
           <Text
             className="text-center text-gita-secondary dark:text-gita-dark-secondary"
             style={{ fontSize: Math.min(14, prefs.fontSize - 2) }}
           >
-            {language === "english"
-              ? "Tap the star icon on verses to bookmark them for later reading"
-              : "बाद में पढ़ने के लिए श्लोकों पर तारे के आइकन को टैप करें"}
+            {language === 'english'
+              ? 'Tap the star icon on verses to bookmark them for later reading'
+              : 'बाद में पढ़ने के लिए श्लोकों पर तारे के आइकन को टैप करें'}
           </Text>
         </View>
       </View>
@@ -153,14 +126,14 @@ export default function BookmarksScreen() {
           style={{ fontSize: Math.min(24, prefs.fontSize + 8) }}
           accessibilityRole="header"
         >
-          {language === "english" ? "Bookmarks" : "बुकमार्क"}
+          {language === 'english' ? 'Bookmarks' : 'बुकमार्क'}
         </Text>
         <Text
           className="text-sm text-gita-secondary dark:text-gita-dark-secondary mt-1"
           style={{ fontSize: Math.min(14, prefs.fontSize - 2) }}
         >
-          {language === "english"
-            ? `${bookmarks.length} saved verse${bookmarks.length !== 1 ? "s" : ""}`
+          {language === 'english'
+            ? `${bookmarks.length} saved verse${bookmarks.length !== 1 ? 's' : ''}`
             : `${bookmarks.length} सहेजे गए श्लोक`}
         </Text>
       </View>
@@ -168,96 +141,79 @@ export default function BookmarksScreen() {
       <FlatList
         data={bookmarks}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          paddingHorizontal: spacing.lg,
-          paddingTop: spacing.lg,
-          paddingBottom: spacing.xl,
-          gap: spacing.md,
-        }}
+        contentContainerStyle={{ paddingBottom: 24 }}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => handleBookmarkPress(item)}
-            activeOpacity={0.7}
-            accessibilityRole="button"
-            accessibilityLabel={`${language === "english" ? "Chapter" : "अध्याय"} ${item.chapter}, ${language === "english" ? "Verse" : "श्लोक"} ${item.verse}`}
-          >
-            <Card
+          <>
+            <AnimatedCard
+              onPress={() => handleBookmarkPress(item)}
+              enableHaptic={prefs.toggles.enableHaptics}
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel={`${language === 'english' ? 'Chapter' : 'अध्याय'} ${item.chapter}, ${language === 'english' ? 'Verse' : 'श्लोक'} ${item.verse}`}
               style={{
-                backgroundColor: colors.verseBox,
-                borderColor: colors.border,
-                borderRadius: radius.lg,
+                paddingHorizontal: 16,
+                paddingVertical: 12,
               }}
             >
-              <CardContent style={{ padding: spacing.lg }}>
-                <View className="flex-row justify-between items-start">
-                  <View className="flex-1 pr-3">
-                    <Text
-                      className="font-semibold mb-2"
-                      style={{
-                        color: colors.accent,
-                        fontSize: Math.min(fontSize.md, prefs.fontSize),
-                        fontWeight: fontWeight.semibold,
+              <Card className="bg-gita-card dark:bg-gita-dark-card">
+                <CardContent className="py-4">
+                  <View className="flex-row justify-between items-center">
+                    <View className="flex-row items-center flex-1">
+                      <Text className="text-3xl mr-4">⭐</Text>
+                      <View className="flex-1">
+                        <View className="flex-row items-center mb-1">
+                          <Badge className="bg-gita-accent dark:bg-gita-dark-accent mr-2">
+                            <Text className="text-white text-xs font-semibold">
+                              {item.chapter}.{item.verse}
+                            </Text>
+                          </Badge>
+                          <Text
+                            className="text-gita-text dark:text-gita-dark-text font-semibold"
+                            style={{ fontSize: Math.min(16, prefs.fontSize) }}
+                          >
+                            {language === 'english'
+                              ? `Chapter ${item.chapter}, Verse ${item.verse}`
+                              : `अध्याय ${item.chapter}, श्लोक ${item.verse}`}
+                          </Text>
+                        </View>
+                        {item.note && (
+                          <Text
+                            className="text-gita-secondary dark:text-gita-dark-secondary mt-1 italic"
+                            style={{ fontSize: Math.min(13, prefs.fontSize - 3) }}
+                            numberOfLines={2}
+                          >
+                            {item.note}
+                          </Text>
+                        )}
+                        <Text
+                          className="text-xs text-gita-secondary dark:text-gita-dark-secondary mt-2"
+                          style={{ fontSize: Math.max(10, prefs.fontSize - 6) }}
+                        >
+                          {language === 'english'
+                            ? `Saved ${new Date(item.timestamp).toLocaleDateString()}`
+                            : `${new Date(item.timestamp).toLocaleDateString()} को सहेजा गया`}
+                        </Text>
+                      </View>
+                    </View>
+                    <TouchableOpacity
+                      onPress={(e) => {
+                        e.stopPropagation();
+                        setDeleteBookmark(item);
                       }}
+                      hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                      accessibilityRole="button"
+                      accessibilityLabel={
+                        language === 'english' ? 'Remove bookmark' : 'बुकमार्क हटाएं'
+                      }
                     >
-                      {language === "english"
-                        ? `Chapter ${item.chapter} • Verse ${item.verse}`
-                        : `अध्याय ${item.chapter} • श्लोक ${item.verse}`}
-                    </Text>
-                    {item.note && (
-                      <Text
-                        style={{
-                          color: colors.text,
-                          fontSize: Math.min(fontSize.sm, prefs.fontSize - 2),
-                          lineHeight: Math.min(22, prefs.fontSize + 6),
-                        }}
-                        numberOfLines={2}
-                      >
-                        {item.note}
-                      </Text>
-                    )}
-                    <Text
-                      className="mt-2"
-                      style={{
-                        color: colors.secondary,
-                        fontSize: Math.max(fontSize.xs - 1, prefs.fontSize - 5),
-                      }}
-                    >
-                      {language === "english"
-                        ? `Saved ${new Date(item.timestamp).toLocaleDateString()}`
-                        : `${new Date(item.timestamp).toLocaleDateString()} को सहेजा गया`}
-                    </Text>
+                      <Text className="text-red-500 text-xl">✕</Text>
+                    </TouchableOpacity>
                   </View>
-
-                  <TouchableOpacity
-                    onPress={(e) => {
-                      e.stopPropagation();
-                      setDeleteBookmark(item);
-                    }}
-                    hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                    accessibilityRole="button"
-                    accessibilityLabel={
-                      language === "english"
-                        ? "Remove bookmark"
-                        : "बुकमार्क हटाएं"
-                    }
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: radius.full,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <MaterialIcons
-                      name="close"
-                      size={22}
-                      color={colors.accent}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </CardContent>
-            </Card>
-          </TouchableOpacity>
+                </CardContent>
+              </Card>
+            </AnimatedCard>
+            <Separator className="mx-4" />
+          </>
         )}
         removeClippedSubviews={true}
         maxToRenderPerBatch={10}
@@ -273,26 +229,26 @@ export default function BookmarksScreen() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {language === "english" ? "Remove Bookmark?" : "बुकमार्क हटाएं?"}
+              {language === 'english'
+                ? 'Remove Bookmark?'
+                : 'बुकमार्क हटाएं?'}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              {language === "english"
+              {language === 'english'
                 ? `Are you sure you want to remove the bookmark for Chapter ${deleteBookmark?.chapter}, Verse ${deleteBookmark?.verse}? This action cannot be undone.`
                 : `क्या आप वाकई अध्याय ${deleteBookmark?.chapter}, श्लोक ${deleteBookmark?.verse} के बुकमार्क को हटाना चाहते हैं? इस कार्रवाई को पूर्ववत नहीं किया जा सकता।`}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onPress={() => setDeleteBookmark(null)}>
-              <Text>{language === "english" ? "Cancel" : "रद्द करें"}</Text>
+              <Text>{language === 'english' ? 'Cancel' : 'रद्द करें'}</Text>
             </AlertDialogCancel>
             <AlertDialogAction
-              onPress={() =>
-                deleteBookmark && handleRemoveBookmark(deleteBookmark)
-              }
-              style={{ backgroundColor: colors.accent }}
+              onPress={() => deleteBookmark && handleRemoveBookmark(deleteBookmark)}
+              className="bg-red-600 dark:bg-red-700"
             >
               <Text className="text-white">
-                {language === "english" ? "Remove" : "हटाएं"}
+                {language === 'english' ? 'Remove' : 'हटाएं'}
               </Text>
             </AlertDialogAction>
           </AlertDialogFooter>
