@@ -74,9 +74,14 @@ export default function SettingsScreen({
     ) => {
       triggerLightHaptic(prefs.toggles.enableHaptics);
       if (externalUrl) {
-        const canOpen = await Linking.canOpenURL(externalUrl);
+        // Enforce HTTPS to prevent MITM attacks
+        const secureUrl = externalUrl.startsWith('http://')
+          ? externalUrl.replace(/^http:\/\//i, 'https://')
+          : externalUrl;
+
+        const canOpen = await Linking.canOpenURL(secureUrl);
         if (canOpen) {
-          await Linking.openURL(externalUrl);
+          await Linking.openURL(secureUrl);
           return;
         }
       }
