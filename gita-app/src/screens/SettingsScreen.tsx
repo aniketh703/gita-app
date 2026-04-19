@@ -74,9 +74,15 @@ export default function SettingsScreen({
     ) => {
       triggerLightHaptic(prefs.toggles.enableHaptics);
       if (externalUrl) {
-        const canOpen = await Linking.canOpenURL(externalUrl);
+        // Sentinel: Secure URL handling to prevent MITM. Auto-upgrade http to https
+        let secureUrl = externalUrl;
+        if (secureUrl.startsWith('http://')) {
+          secureUrl = secureUrl.replace(/^http:\/\//i, 'https://');
+        }
+
+        const canOpen = await Linking.canOpenURL(secureUrl);
         if (canOpen) {
-          await Linking.openURL(externalUrl);
+          await Linking.openURL(secureUrl);
           return;
         }
       }
