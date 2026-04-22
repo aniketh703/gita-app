@@ -14,8 +14,14 @@ export function ExternalLink({ href, ...rest }: Props) {
         if (process.env.EXPO_OS !== 'web') {
           // Prevent the default behavior of linking to the default browser on native.
           event.preventDefault();
+
+          // Enforce HTTPS for external links to prevent MITM vulnerabilities
+          const secureHref = typeof href === 'string'
+            ? href.replace(/^http:\/\//i, "https://")
+            : href;
+
           // Open the link in an in-app browser.
-          await openBrowserAsync(href, {
+          await openBrowserAsync(secureHref, {
             presentationStyle: WebBrowserPresentationStyle.AUTOMATIC,
           });
         }
