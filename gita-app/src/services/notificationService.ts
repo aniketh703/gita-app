@@ -122,8 +122,8 @@ export function interpolateTemplate(
 
   Object.entries(context).forEach(([key, value]) => {
     const placeholder = `{${key}}`;
-    title = title.replace(new RegExp(placeholder, "g"), String(value));
-    body = body.replace(new RegExp(placeholder, "g"), String(value));
+    title = title.replaceAll(placeholder, String(value));
+    body = body.replaceAll(placeholder, String(value));
   });
 
   return { ...template, title, body };
