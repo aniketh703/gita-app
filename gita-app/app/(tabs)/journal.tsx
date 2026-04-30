@@ -287,6 +287,7 @@ export default function JournalScreen() {
               multiline
               numberOfLines={8}
               textAlignVertical="top"
+              maxLength={5000}
               style={{
                 backgroundColor: colors.verseBox,
                 borderRadius: radius.md,

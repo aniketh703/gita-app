@@ -303,6 +303,7 @@ export default function SearchScreen({
           onChangeText={handleSearchChange}
           autoFocus
           returnKeyType="search"
+          maxLength={100}
         />
         {searchQuery.length > 0 && (
           <TouchableOpacity onPress={handleClearSearch}>
