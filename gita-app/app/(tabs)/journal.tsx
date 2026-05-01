@@ -284,6 +284,7 @@ export default function JournalScreen() {
                   : "आज कौन सी बुद्धि आपके साथ प्रतिध्वनित होती है?"
               }
               placeholderTextColor={colors.secondary}
+              maxLength={5000}
               multiline
               numberOfLines={8}
               textAlignVertical="top"
