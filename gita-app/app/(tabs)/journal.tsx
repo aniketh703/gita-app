@@ -298,6 +298,7 @@ export default function JournalScreen() {
                 minHeight: 200,
                 marginBottom: spacing.md,
               }}
+              maxLength={5000}
             />
 
             <Button
