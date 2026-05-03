@@ -299,6 +299,7 @@ export default function SearchScreen({
           style={[styles.searchInput, { color: colors.text }]}
           placeholder="Search verses..."
           placeholderTextColor={colors.secondary}
+          maxLength={100}
           value={searchQuery}
           onChangeText={handleSearchChange}
           autoFocus

@@ -7,3 +7,8 @@
 **Vulnerability:** Dynamically constructing regular expressions using `new RegExp(placeholder, "g")` in `interpolateTemplate` (`notificationService.ts`) with unsanitized keys from a dictionary can lead to Regular Expression Denial of Service (ReDoS) or regex injection if a key contains special regex characters.
 **Learning:** React Native's JS environments (Hermes/V8) support modern ECMAScript features. Passing unescaped, dynamic input directly to `RegExp` constructors is a risky pattern.
 **Prevention:** Use `String.prototype.replaceAll(searchString, replaceValue)` for straightforward string literal replacement instead of constructing regular expressions dynamically. It treats the search term strictly as a literal string.
+
+## 2026-05-03 - [Missing maxLength on React Native TextInputs]
+**Vulnerability:** React Native `TextInput` components were lacking a `maxLength` property.
+**Learning:** This exposes the app to localized Denial of Service (DoS) risks, memory exhaustion, UI freezing, and storage quota issues, especially when user inputs (like journal entries or search queries) are stored locally in AsyncStorage. A maliciously large input pasted into the text box could crash the app or fill the storage.
+**Prevention:** Always define explicit `maxLength` boundaries on `TextInput` components to enforce input length limits directly at the UI layer.
