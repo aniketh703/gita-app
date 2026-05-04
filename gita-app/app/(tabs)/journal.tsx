@@ -286,6 +286,7 @@ export default function JournalScreen() {
               placeholderTextColor={colors.secondary}
               multiline
               numberOfLines={8}
+              maxLength={5000} // Sentinel: Prevent DoS risk and memory exhaustion
               textAlignVertical="top"
               style={{
                 backgroundColor: colors.verseBox,
