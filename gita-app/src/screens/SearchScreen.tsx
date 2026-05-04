@@ -299,6 +299,7 @@ export default function SearchScreen({
           style={[styles.searchInput, { color: colors.text }]}
           placeholder="Search verses..."
           placeholderTextColor={colors.secondary}
+          maxLength={100} // Sentinel: Prevent DoS risk and memory exhaustion
           value={searchQuery}
           onChangeText={handleSearchChange}
           autoFocus
