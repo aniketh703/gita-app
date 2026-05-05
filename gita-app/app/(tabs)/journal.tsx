@@ -286,6 +286,7 @@ export default function JournalScreen() {
               placeholderTextColor={colors.secondary}
               multiline
               numberOfLines={8}
+              maxLength={5000}
               textAlignVertical="top"
               style={{
                 backgroundColor: colors.verseBox,
