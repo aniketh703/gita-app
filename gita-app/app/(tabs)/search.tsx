@@ -110,6 +110,7 @@ export default function SearchScreen() {
               language === "english" ? "Search slokas..." : "श्लोक खोजें..."
             }
             placeholderTextColor={colors.secondary}
+            maxLength={100}
             style={{
               flex: 1,
               fontSize: fontSize.md,
